@@ -1,3 +1,3 @@
 # ShimmerLoader
 
-Configurable Loader with a shimmering effect for any angular app
+Configurable shimmer loader which can be used to mimic the structure of lists, tables etc while the data is loading
