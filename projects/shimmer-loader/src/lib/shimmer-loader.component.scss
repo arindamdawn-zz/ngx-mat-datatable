@@ -1,0 +1,55 @@
+.skeleton {
+
+  h3,
+  h4,
+  p,
+  .fake-image {
+    animation: loading 1s infinite linear;
+    background: #f6f7f8;
+    background-image: -webkit-linear-gradient(to left, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-image: linear-gradient(to left, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+  }
+
+  h3 {
+    height: 22px;
+    width: 200px;
+  }
+
+  h4 {
+    height: 18px;
+    width: 200px;
+  }
+
+  p {
+    height: 45px;
+    width: 100%;
+  }
+
+  .fake-image {
+    height: 100px;
+    width: 100%;
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: -100px;
+  }
+
+  100% {
+    background-position: 200px;
+  }
+}
+
+
+// card-loader
+.card-loader{
+  display: flex;
+  flex-wrap: wrap;
+}
+mat-card {
+  margin-bottom: 2rem;
+  height: 200px;
+  width: 33.33%;
+}

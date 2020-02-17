@@ -1,6 +1,90 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "datatable": {
+      "projectType": "library",
+      "root": "projects/datatable",
+      "sourceRoot": "projects/datatable/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/datatable/tsconfig.lib.json",
+            "project": "projects/datatable/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/datatable/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/datatable/src/test.ts",
+            "tsConfig": "projects/datatable/tsconfig.spec.json",
+            "karmaConfig": "projects/datatable/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/datatable/tsconfig.lib.json",
+              "projects/datatable/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "shimmer-loader": {
+      "projectType": "library",
+      "root": "projects/shimmer-loader",
+      "sourceRoot": "projects/shimmer-loader/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/shimmer-loader/tsconfig.lib.json",
+            "project": "projects/shimmer-loader/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/shimmer-loader/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/shimmer-loader/src/test.ts",
+            "tsConfig": "projects/shimmer-loader/tsconfig.spec.json",
+            "karmaConfig": "projects/shimmer-loader/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/shimmer-loader/tsconfig.lib.json",
+              "projects/shimmer-loader/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "cli": {
+    "analytics": "6c30704e-067c-466d-8a76-1b7b6ac470cb"
+  },
+  "defaultProject": "datatable"
 }

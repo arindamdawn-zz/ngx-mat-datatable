@@ -17,7 +17,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "datatable": [
+        "dist/datatable/datatable",
+        "dist/datatable"
+      ],
+      "shimmer-loader": [
+        "dist/shimmer-loader/shimmer-loader",
+        "dist/shimmer-loader"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
