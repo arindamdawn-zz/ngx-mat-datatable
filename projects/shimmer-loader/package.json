@@ -8,8 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arindamdawn/sekureMerchantSolutions.git",
-    "directory": "projects/react-dom"
+    "url": "https://github.com/arindamdawn/angular-libraries.git",
+    "directory": "projects/shimmer-loader"
   },
   "keywords": [
     "loader",
@@ -17,7 +17,7 @@
     "angular-shimmer-loader"
   ],
   "bugs": {
-    "url": "https://github.com/arindamdawn/sekureMerchantSolutions/issues"
+    "url": "https://github.com/arindamdawn/angular-libraries/issues"
   },
   "peerDependencies": {
     "@angular/common": "^9.0.1",
