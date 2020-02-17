@@ -1,6 +1,24 @@
 {
   "name": "shimmer-loader",
-  "version": "0.0.3",
+  "description": "Configurable shimmer loader which can be used to mimic the structure of lists, tables etc while the data is loading",
+  "version": "0.0.4",
+  "author": {
+    "name": "Arindam Dawn",
+    "email": "arindamdawn3@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arindamdawn/sekureMerchantSolutions.git",
+    "directory": "projects/react-dom"
+  },
+  "keywords": [
+    "loader",
+    "shimmer-loader",
+    "angular-shimmer-loader"
+  ],
+  "bugs": {
+    "url": "https://github.com/arindamdawn/sekureMerchantSolutions/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^9.0.1",
     "@angular/core": "^9.0.1",
