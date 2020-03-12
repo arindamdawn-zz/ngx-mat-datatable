@@ -25,9 +25,7 @@
     "tslib": "^1.10.0",
     "@angular/material": "^9.1.2",
     "@angular/forms": "~9.0.6",
-    "@angular/cdk": "^9.1.2"
-  },
-  "dependencies": {
+    "@angular/cdk": "^9.1.2",
     "shimmer-loader": "^0.0.5"
   }
 }
