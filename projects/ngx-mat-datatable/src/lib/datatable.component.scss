@@ -1,0 +1,61 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+
+  tr {
+      cursor: pointer;
+  }
+}
+
+.mat-select-panel .mat-option:last-child .mat-option-text {
+  display: none;
+}
+
+mat-option:last-child:before {
+  content: 'All';
+  float: left;
+  text-transform: none;
+  top: 4px;
+  position: relative;
+}
+
+mat-option:last-child .mat-option-text {
+  display: none;
+  position: relative;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.no-records {
+  height: 15rem;
+  padding-bottom: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+@media screen and (max-width: 600px) {
+  .table-container {
+      overflow-x: scroll;
+  }
+}

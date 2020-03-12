@@ -31,7 +31,7 @@ export class DatatableComponent implements OnInit {
   @Input() expandedDetailEnabled: boolean = false;
   @Input() showFilter: boolean = false;
   @Input() filterPlaceholder: string = "Search";
-  @Input() exportEnabled: boolean = true;
+  @Input() exportEnabled: boolean = false;
   @Input() name: string = "default_table";
   @Input() isLoading: boolean = true;
   @Output() rowSelected: EventEmitter<Array<any>> = new EventEmitter<
