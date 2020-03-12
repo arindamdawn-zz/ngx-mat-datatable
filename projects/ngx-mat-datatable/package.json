@@ -1,0 +1,33 @@
+{
+  "name": "ngx-mat-datatable",
+  "description": "Customizable material datatable built on top on Angular material datatable",
+  "version": "0.0.2",
+  "author": {
+    "name": "Arindam Dawn",
+    "email": "arindamdawn3@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arindamdawn/angular-libraries.git",
+    "directory": "projects/datatable"
+  },
+  "keywords": [
+    "loader",
+    "ngx-mat-datatable",
+    "angular material datatable"
+  ],
+  "bugs": {
+    "url": "https://github.com/arindamdawn/angular-libraries/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "^9.0.6",
+    "@angular/core": "^9.0.6",
+    "tslib": "^1.10.0",
+    "@angular/material": "^9.1.2",
+    "@angular/forms": "~9.0.6",
+    "@angular/cdk": "^9.1.2"
+  },
+  "dependencies": {
+    "shimmer-loader": "^0.0.5"
+  }
+}

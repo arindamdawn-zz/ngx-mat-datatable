@@ -20,8 +20,8 @@
     ],
     "paths": {
       "datatable": [
-        "dist/datatable/datatable",
-        "dist/datatable"
+        "dist/ngx-mat-datatable/ngx-mat-datatable",
+        "dist/ngx-mat-datatable"
       ],
       "shimmer-loader": [
         "dist/shimmer-loader/shimmer-loader",

@@ -3,38 +3,38 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "datatable": {
+    "ngx-mat-datatable": {
       "projectType": "library",
-      "root": "projects/datatable",
-      "sourceRoot": "projects/datatable/src",
-      "prefix": "lib",
+      "root": "projects/ngx-mat-datatable",
+      "sourceRoot": "projects/ngx-mat-datatable/src",
+      "prefix": "",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/datatable/tsconfig.lib.json",
-            "project": "projects/datatable/ng-package.json"
+            "tsConfig": "projects/ngx-mat-datatable/tsconfig.lib.json",
+            "project": "projects/ngx-mat-datatable/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/datatable/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-mat-datatable/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/datatable/src/test.ts",
-            "tsConfig": "projects/datatable/tsconfig.spec.json",
-            "karmaConfig": "projects/datatable/karma.conf.js"
+            "main": "projects/ngx-mat-datatable/src/test.ts",
+            "tsConfig": "projects/ngx-mat-datatable/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-mat-datatable/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/datatable/tsconfig.lib.json",
-              "projects/datatable/tsconfig.spec.json"
+              "projects/ngx-mat-datatable/tsconfig.lib.json",
+              "projects/ngx-mat-datatable/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

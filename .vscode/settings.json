@@ -1,3 +1,12 @@
 {
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "json"
+    ]
 }
