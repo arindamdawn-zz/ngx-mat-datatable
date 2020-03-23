@@ -8,11 +8,11 @@ import {
   ViewChild,
   SimpleChanges
 } from "@angular/core";
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { SelectionModel } from '@angular/cdk/collections';
-import { DataColumn } from './datatable.interface';
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { SelectionModel } from "@angular/cdk/collections";
+import { DataColumn } from "./datatable.interface";
 
 @Component({
   selector: "ngx-mat-datatable",
@@ -20,10 +20,10 @@ import { DataColumn } from './datatable.interface';
   styleUrls: ["./datatable.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatatableComponent implements OnInit {
+export class DatatableComponent<T> implements OnInit {
   constructor() {}
   // Todo make generic click handlers for row actions (determine how to grab row data on specific action click such as edit)
-  @Input() data: Array<any> = [];
+  @Input() data: Array<T> = [];
   @Input() displayedColumns: DataColumn[] = [];
   @Input() actionEnabled: boolean = false;
   @Input() selectEnabled: boolean = false;
@@ -34,13 +34,11 @@ export class DatatableComponent implements OnInit {
   @Input() exportEnabled: boolean = false;
   @Input() name: string = "default_table";
   @Input() isLoading: boolean = true;
-  @Output() rowSelected: EventEmitter<Array<any>> = new EventEmitter<
-    Array<any>
-  >();
+  @Output() rowSelected = new EventEmitter<Array<T>>();
   @Output() actionClicked: EventEmitter<string> = new EventEmitter<string>();
   dataSource;
   maxAll: number = 3;
-  selection = new SelectionModel<any>(true, []);
+  selection = new SelectionModel<T>(true, []);
   columnsToDisplay: string[];
   noDataText: string = "No records found";
   noData: boolean = false;
@@ -84,9 +82,9 @@ export class DatatableComponent implements OnInit {
   /**
    * Emits row data when a table row is clicked
    *
-   * @param {Array<any>} rowData
+   * @param {Array<T>} rowData
    */
-  onRowSelected<T>(rowData: Array<T>): void {
+  onRowSelected(rowData: Array<T>): void {
     this.rowSelected.emit(rowData);
   }
 
@@ -134,7 +132,7 @@ export class DatatableComponent implements OnInit {
 
   exportPDF() {}
 
-  exportExcel(){}
+  exportExcel() {}
 
   getPageSizeOptions(): number[] {
     if (this.dataSource && this.dataSource.paginator.length > this.maxAll)
