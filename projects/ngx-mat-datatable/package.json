@@ -1,7 +1,7 @@
 {
   "name": "ngx-mat-datatable",
   "description": "Customizable material datatable built on top on Angular material datatable",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "author": {
     "name": "Arindam Dawn",
     "email": "arindamdawn3@gmail.com"

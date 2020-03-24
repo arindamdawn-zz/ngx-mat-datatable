@@ -11,6 +11,7 @@
     [dataSource]="dataSource"
     class="mat-elevation-z0"
     matSort
+    (matSortChange)="sortData($event)"
     matTableExporter
     multiTemplateDataRows
   >
@@ -112,9 +113,7 @@
 <div *ngIf="!isLoading && noData" class="no-records mat-elevation-z0">
   {{ noDataText }}
 </div>
-<div class="loading mat-elevation-z0" *ngIf="isLoading">
-  <lib-shimmer-loader [count]="5"></lib-shimmer-loader>
-</div>
+
 <mat-paginator [pageSizeOptions]="getPageSizeOptions()"></mat-paginator>
 
 <div class="export-options" *ngIf="exportEnabled">

@@ -8,7 +8,7 @@ import {
   ViewChild,
   SimpleChanges
 } from "@angular/core";
-import { MatSort } from "@angular/material/sort";
+import { MatSort, Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { SelectionModel } from "@angular/cdk/collections";
@@ -52,7 +52,6 @@ export class DatatableComponent<T> implements OnInit {
       console.log("data defined");
       this.isLoading = false;
       this.dataSource = new MatTableDataSource(changes.data.currentValue);
-      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.noData = this.dataSource.data.length === 0;
     }
@@ -139,4 +138,23 @@ export class DatatableComponent<T> implements OnInit {
       return [5, 10, this.dataSource.paginator.length];
     else return [5, 10, this.maxAll];
   }
+
+  sortData(sort: Sort): void {
+    if (sort.direction === '') {
+      this.dataSource.data = this.data;
+      return;
+    }
+
+    const sortedData = this.data.slice();
+    sortedData.sort(
+      (a: T, b: T) => sort.direction === 'asc'
+        ? _sortAlphanumeric(a[sort.active], b[sort.active])
+        : _sortAlphanumeric(b[sort.active], a[sort.active])
+    );
+    this.dataSource.data = sortedData;
+  }
+}
+
+function _sortAlphanumeric(a: string, b: string): number {
+  return a.localeCompare(b, 'en', { numeric: true });
 }
