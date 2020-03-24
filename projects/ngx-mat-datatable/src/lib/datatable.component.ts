@@ -26,14 +26,15 @@ export class DatatableComponent<T> implements OnInit {
   @Input() data: Array<T> = [];
   @Input() displayedColumns: DataColumn[] = [];
   @Input() actionEnabled: boolean = false;
+  @Input() showIndex: boolean = false;
+  @Input() indexColumnLabel: string = "No.";
   @Input() selectEnabled: boolean = false;
   @Input() actionMenuItems: Array<string> = [];
   @Input() expandedDetailEnabled: boolean = false;
   @Input() showFilter: boolean = false;
   @Input() filterPlaceholder: string = "Search";
-  @Input() exportEnabled: boolean = false;
+  // @Input() exportEnabled: boolean = false;
   @Input() name: string = "default_table";
-  @Input() isLoading: boolean = true;
   @Output() rowSelected = new EventEmitter<Array<T>>();
   @Output() actionClicked: EventEmitter<string> = new EventEmitter<string>();
   dataSource;
@@ -50,7 +51,6 @@ export class DatatableComponent<T> implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes["data"] !== undefined && changes.data.currentValue) {
       console.log("data defined");
-      this.isLoading = false;
       this.dataSource = new MatTableDataSource(changes.data.currentValue);
       this.dataSource.paginator = this.paginator;
       this.noData = this.dataSource.data.length === 0;
@@ -74,6 +74,9 @@ export class DatatableComponent<T> implements OnInit {
     }
     if (this.selectEnabled) {
       columnNames.unshift("select"); // appends 'select' column as the 1st column
+    }
+    if (this.showIndex) {
+      columnNames.unshift("index");
     }
     this.columnsToDisplay = columnNames.slice();
   }
@@ -140,14 +143,14 @@ export class DatatableComponent<T> implements OnInit {
   }
 
   sortData(sort: Sort): void {
-    if (sort.direction === '') {
+    if (sort.direction === "") {
       this.dataSource.data = this.data;
       return;
     }
 
     const sortedData = this.data.slice();
-    sortedData.sort(
-      (a: T, b: T) => sort.direction === 'asc'
+    sortedData.sort((a: T, b: T) =>
+      sort.direction === "asc"
         ? _sortAlphanumeric(a[sort.active], b[sort.active])
         : _sortAlphanumeric(b[sort.active], a[sort.active])
     );
@@ -156,5 +159,5 @@ export class DatatableComponent<T> implements OnInit {
 }
 
 function _sortAlphanumeric(a: string, b: string): number {
-  return a.localeCompare(b, 'en', { numeric: true });
+  return a.localeCompare(b, "en", { numeric: true });
 }

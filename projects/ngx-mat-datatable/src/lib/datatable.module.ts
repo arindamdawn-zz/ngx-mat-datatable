@@ -5,7 +5,6 @@ import { MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
-import { ShimmerLoaderModule } from "shimmer-loader";
 import { MatSortModule } from "@angular/material/sort";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatMenuModule } from "@angular/material/menu";
@@ -26,8 +25,7 @@ import { MatInputModule } from "@angular/material/input";
     MatPaginatorModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatButtonModule,
-    ShimmerLoaderModule
+    MatButtonModule
   ],
   exports: [DatatableComponent, MatTableModule]
 })
