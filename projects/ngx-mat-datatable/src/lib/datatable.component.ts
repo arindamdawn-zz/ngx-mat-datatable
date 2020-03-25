@@ -36,8 +36,11 @@ export class DatatableComponent<T> implements OnInit {
   // @Input() exportEnabled: boolean = false;
   @Input() name: string = "default_table";
   @Output() rowSelected = new EventEmitter<T>();
-  @Output() actionClicked = new EventEmitter<string>();
-  @Output() selectedRows = new EventEmitter<SelectionChange<T>>();
+  @Output() actionClicked = new EventEmitter<{
+    actionName: string;
+    rowData: T;
+  }>();
+  @Output() selectedRows = new EventEmitter<T[]>();
   dataSource;
   maxAll: number = 3;
   selection = new SelectionModel<T>(true, []);
@@ -60,7 +63,9 @@ export class DatatableComponent<T> implements OnInit {
 
   ngOnInit() {
     this.populateTableData(this.displayedColumns);
-    this.selection.changed.subscribe(next => this.selectedRows.emit(next));
+    this.selection.changed.subscribe(next =>
+      this.selectedRows.emit(next.source.selected)
+    );
   }
 
   /**
@@ -97,9 +102,8 @@ export class DatatableComponent<T> implements OnInit {
    *
    * @param {string} action
    */
-  onActionClick<T>(action: string, rowData: Array<T>): void {
-    console.log("row data", rowData);
-    this.actionClicked.emit(action);
+  onActionClick(action: string, rowData: T): void {
+    this.actionClicked.emit({ actionName: action, rowData: rowData });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
