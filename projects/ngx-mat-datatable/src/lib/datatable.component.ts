@@ -11,7 +11,7 @@ import {
 import { MatSort, Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
-import { SelectionModel } from "@angular/cdk/collections";
+import { SelectionModel, SelectionChange } from "@angular/cdk/collections";
 import { DataColumn } from "./datatable.interface";
 
 @Component({
@@ -35,8 +35,9 @@ export class DatatableComponent<T> implements OnInit {
   @Input() filterPlaceholder: string = "Search";
   // @Input() exportEnabled: boolean = false;
   @Input() name: string = "default_table";
-  @Output() rowSelected = new EventEmitter<Array<T>>();
-  @Output() actionClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output() rowSelected = new EventEmitter<T>();
+  @Output() actionClicked = new EventEmitter<string>();
+  @Output() selectedRows = new EventEmitter<SelectionChange<T>>();
   dataSource;
   maxAll: number = 3;
   selection = new SelectionModel<T>(true, []);
@@ -59,6 +60,7 @@ export class DatatableComponent<T> implements OnInit {
 
   ngOnInit() {
     this.populateTableData(this.displayedColumns);
+    this.selection.changed.subscribe(next => this.selectedRows.emit(next));
   }
 
   /**
@@ -84,9 +86,9 @@ export class DatatableComponent<T> implements OnInit {
   /**
    * Emits row data when a table row is clicked
    *
-   * @param {Array<T>} rowData
+   * @param {T} rowData
    */
-  onRowSelected(rowData: Array<T>): void {
+  onRowSelected(rowData: T): void {
     this.rowSelected.emit(rowData);
   }
 
