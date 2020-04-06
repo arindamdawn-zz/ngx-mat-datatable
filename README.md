@@ -1,3 +1,4 @@
-# Angular Libraries
+# NgxMatDatatable
 
-Angular Libraries used by in various projects. This is currently work in progress and not reliable for production-grade projects.
+Customizable material datatable built on top on Angular material datatable.
+Currently development in progress.
