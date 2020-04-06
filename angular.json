@@ -36,53 +36,115 @@
               "projects/ngx-mat-datatable/tsconfig.lib.json",
               "projects/ngx-mat-datatable/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
     },
-    "shimmer-loader": {
-      "projectType": "library",
-      "root": "projects/shimmer-loader",
-      "sourceRoot": "projects/shimmer-loader/src",
-      "prefix": "lib",
+    "sample": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/sample",
+      "sourceRoot": "projects/sample/src",
+      "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "tsConfig": "projects/shimmer-loader/tsconfig.lib.json",
-            "project": "projects/shimmer-loader/ng-package.json"
+            "outputPath": "dist/sample",
+            "index": "projects/sample/src/index.html",
+            "main": "projects/sample/src/main.ts",
+            "polyfills": "projects/sample/src/polyfills.ts",
+            "tsConfig": "projects/sample/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/sample/src/favicon.ico",
+              "projects/sample/src/assets"
+            ],
+            "styles": [
+              "projects/sample/src/styles.scss"
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/shimmer-loader/tsconfig.lib.prod.json"
+              "fileReplacements": [
+                {
+                  "replace": "projects/sample/src/environments/environment.ts",
+                  "with": "projects/sample/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "main": "projects/shimmer-loader/src/test.ts",
-            "tsConfig": "projects/shimmer-loader/tsconfig.spec.json",
-            "karmaConfig": "projects/shimmer-loader/karma.conf.js"
+            "browserTarget": "sample:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sample:build:production"
+            }
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "tsConfig": [
-              "projects/shimmer-loader/tsconfig.lib.json",
-              "projects/shimmer-loader/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "browserTarget": "sample:build"
           }
         }
       }
-    }},
+    }
+  },
   "cli": {
     "analytics": "6c30704e-067c-466d-8a76-1b7b6ac470cb"
   },
