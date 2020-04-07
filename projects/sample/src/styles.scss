@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+
+$sekurePortal-primary: mat-palette($mat-indigo, 700);
+$sekurePortal-accent: mat-palette($mat-pink, A200, A100, A400);
+
+$custom-typography: mat-typography-config($font-family: '"Open Sans", sans-serif;');
+@include mat-core($custom-typography);
+
+// The warn palette is optional (defaults to red).
+$sekurePortal-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$sekurePortal-theme: mat-light-theme($sekurePortal-primary, $sekurePortal-accent, $sekurePortal-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+
+// Set custom background color
+$custom-background-color: map_get($mat-blue-grey, 50);
+
+$background: map-get($sekurePortal-theme, background);
+$background: map_merge($background, (background: $custom-background-color));
+$sekurePortal-theme: map_merge($sekurePortal-theme, (background: $background));
+
+@include angular-material-theme($sekurePortal-theme);

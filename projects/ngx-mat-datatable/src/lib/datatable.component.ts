@@ -6,7 +6,7 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  SimpleChanges
+  SimpleChanges,
 } from "@angular/core";
 import { MatSort, Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -18,7 +18,7 @@ import { DataColumn } from "./datatable.interface";
   selector: "ngx-mat-datatable",
   templateUrl: "./datatable.component.html",
   styleUrls: ["./datatable.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatatableComponent<T> implements OnInit {
   constructor() {}
@@ -41,7 +41,7 @@ export class DatatableComponent<T> implements OnInit {
     rowData: T;
   }>();
   @Output() selectedRows = new EventEmitter<T[]>();
-  dataSource;
+  dataSource: MatTableDataSource<T>;
   maxAll: number = 3;
   selection = new SelectionModel<T>(true, []);
   columnsToDisplay: string[];
@@ -54,7 +54,6 @@ export class DatatableComponent<T> implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes["data"] !== undefined && changes.data.currentValue) {
-      console.log("data defined");
       this.dataSource = new MatTableDataSource(changes.data.currentValue);
       this.dataSource.paginator = this.paginator;
       this.noData = this.dataSource.data.length === 0;
@@ -63,7 +62,7 @@ export class DatatableComponent<T> implements OnInit {
 
   ngOnInit() {
     this.populateTableData(this.displayedColumns);
-    this.selection.changed.subscribe(next =>
+    this.selection.changed.subscribe((next) =>
       this.selectedRows.emit(next.source.selected)
     );
   }
@@ -73,7 +72,7 @@ export class DatatableComponent<T> implements OnInit {
    */
   populateTableData(columnsData: Array<DataColumn>): void {
     let columnNames: string[] = [];
-    columnsData.map(column => {
+    columnsData.map((column) => {
       columnNames.push(column.name);
     });
     if (this.actionEnabled) {
@@ -117,7 +116,7 @@ export class DatatableComponent<T> implements OnInit {
   masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.dataSource.data.forEach(row => this.selection.select(row));
+      : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
 
   /** The label for the checkbox on the passed row */
@@ -125,9 +124,9 @@ export class DatatableComponent<T> implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? "select" : "deselect"} all`;
     }
-    return `${
-      this.selection.isSelected(row) ? "deselect" : "select"
-    } row ${row.position + 1}`;
+    return `${this.selection.isSelected(row) ? "deselect" : "select"} row ${
+      row.position + 1
+    }`;
   }
 
   /**
@@ -136,6 +135,10 @@ export class DatatableComponent<T> implements OnInit {
    */
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.noData = this.dataSource.filteredData.length === 0;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   exportPDF() {}
@@ -157,8 +160,8 @@ export class DatatableComponent<T> implements OnInit {
     const sortedData = this.data.slice();
     sortedData.sort((a: T, b: T) =>
       sort.direction === "asc"
-        ? _sortAlphanumeric(a[sort.active], b[sort.active])
-        : _sortAlphanumeric(b[sort.active], a[sort.active])
+        ? _sortAlphanumeric(String(a[sort.active]), String(b[sort.active]))
+        : _sortAlphanumeric(String(b[sort.active]), String(a[sort.active]))
     );
     this.dataSource.data = sortedData;
   }
