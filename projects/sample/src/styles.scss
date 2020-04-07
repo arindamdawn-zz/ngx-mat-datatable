@@ -28,3 +28,5 @@ $background: map_merge($background, (background: $custom-background-color));
 $sekurePortal-theme: map_merge($sekurePortal-theme, (background: $background));
 
 @include angular-material-theme($sekurePortal-theme);
+
+@import 'global';

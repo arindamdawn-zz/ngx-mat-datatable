@@ -11,7 +11,7 @@ import {
 import { MatSort, Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
-import { SelectionModel, SelectionChange } from "@angular/cdk/collections";
+import { SelectionModel } from "@angular/cdk/collections";
 import { DataColumn } from "./datatable.interface";
 
 @Component({
@@ -29,13 +29,15 @@ export class DatatableComponent<T> implements OnInit {
   @Input() showIndex: boolean = false;
   @Input() indexColumnLabel: string = "No.";
   @Input() selectEnabled: boolean = false;
+  @Input() selectAllEnabled: boolean = true;
+  @Input() selectColumnTitle: string = "Select";
   @Input() actionMenuItems: Array<string> = [];
   @Input() expandedDetailEnabled: boolean = false;
   @Input() showFilter: boolean = false;
   @Input() filterPlaceholder: string = "Search";
   // @Input() exportEnabled: boolean = false;
   @Input() name: string = "default_table";
-  @Output() rowSelected = new EventEmitter<T>();
+  @Output() rowItemClicked = new EventEmitter<{ name: string; rowData: T }>();
   @Output() actionClicked = new EventEmitter<{
     actionName: string;
     rowData: T;
@@ -78,22 +80,24 @@ export class DatatableComponent<T> implements OnInit {
     if (this.actionEnabled) {
       columnNames.push("action"); //appends an extra 'action' column to the table
     }
-    if (this.selectEnabled) {
-      columnNames.unshift("select"); // appends 'select' column as the 1st column
-    }
     if (this.showIndex) {
       columnNames.unshift("index");
     }
+    if (this.selectEnabled) {
+      columnNames.unshift("select"); // appends 'select' column as the 1st column
+    }
+
     this.columnsToDisplay = columnNames.slice();
   }
 
   /**
-   * Emits row data when a table row is clicked
-   *
-   * @param {T} rowData
+   * Emits row item name and row Data
+   * @param itemName
+   * @param rowData
    */
-  onRowSelected(rowData: T): void {
-    this.rowSelected.emit(rowData);
+
+  onRowItemSelected(name: string, rowData: T): void {
+    this.rowItemClicked.emit({ name, rowData });
   }
 
   /**

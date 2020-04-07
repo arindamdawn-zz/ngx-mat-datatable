@@ -1,10 +1,13 @@
 <div class="container">
+  <h1>Ngx Mat Datatable Sample</h1>
   <mat-card>
     <ngx-mat-datatable
       [displayedColumns]="testColumns"
       [data]="testData"
       [showIndex]="true"
       [showFilter]="true"
+      [selectEnabled]="true"
+      [selectAllEnabled]="false"
     ></ngx-mat-datatable>
   </mat-card>
 </div>

@@ -7,8 +7,13 @@ table {
   width: 100%;
 
   tr {
-      cursor: pointer;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #eeeeee;
+    }
   }
+
 }
 
 .mat-select-panel .mat-option:last-child .mat-option-text {
@@ -60,6 +65,6 @@ tr.detail-row {
 
 @media screen and (max-width: 600px) {
   .table-container {
-      overflow-x: scroll;
+    overflow-x: scroll;
   }
 }
