@@ -139,10 +139,11 @@
       ></tr>
     </ng-container>
   </table>
+  <div *ngIf="noData" class="no-records mat-elevation-z0">
+    {{ noDataText }}
+  </div>
 </div>
-<div *ngIf="noData" class="no-records mat-elevation-z0">
-  {{ noDataText }}
-</div>
+
 
 <mat-paginator [pageSizeOptions]="getPageSizeOptions()"></mat-paginator>
 

@@ -1,7 +1,8 @@
 .table-container {
   width: 100%;
   overflow: auto;
-  height: calc(100vh - 200px);
+  height: 400px;
+  max-height: calc(100vh - 200px);
 }
 
 .sticky {
@@ -53,8 +54,7 @@ mat-option:last-child .mat-option-text {
 }
 
 .no-records {
-  height: 15rem;
-  padding-bottom: 5rem;
+  margin: 4rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
