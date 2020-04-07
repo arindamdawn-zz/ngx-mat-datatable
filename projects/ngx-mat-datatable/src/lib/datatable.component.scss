@@ -1,6 +1,13 @@
 .table-container {
   width: 100%;
-  overflow-x: auto;
+  overflow: auto;
+  height: calc(100vh - 200px);
+}
+
+.sticky {
+  position: sticky;
+  z-index: 100;
+  background-color: white;
 }
 
 table {
@@ -14,6 +21,14 @@ table {
     }
   }
 
+}
+
+.table-filter.sticky {
+  top: 0px;
+}
+
+th.sticky {
+  top: 55px;
 }
 
 .mat-select-panel .mat-option:last-child .mat-option-text {
