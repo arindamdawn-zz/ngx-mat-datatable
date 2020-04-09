@@ -45,7 +45,7 @@ export class DatatableComponent<T> implements OnInit {
   }>();
   @Output() selectedRows = new EventEmitter<T[]>();
   dataSource: MatTableDataSource<T>;
-  maxAll: number = 3;
+  maxAll: number = 10;
   selection = new SelectionModel<T>(true, []);
   columnsToDisplay: string[];
   noDataText: string = "No records found";
@@ -153,7 +153,11 @@ export class DatatableComponent<T> implements OnInit {
   getPageSizeOptions(): number[] {
     if (this.dataSource && this.dataSource.paginator.length > this.maxAll)
       return [5, 10, this.dataSource.paginator.length];
-    else return [5, 10, this.maxAll];
+    else if(this.maxAll !== this.dataSource.paginator.length){
+      return [5, this.maxAll];
+    }else {
+      return [this.maxAll]
+    };
   }
 
   sortData(sort: Sort): void {
