@@ -113,7 +113,7 @@
           "
         >
           <div class="element-description">
-            <p>Description</p>
+            <ng-template [ngTemplateOutlet]="expandedDetailRef"></ng-template>
           </div>
         </div>
       </td>
@@ -143,14 +143,4 @@
     {{ noDataText }}
   </div>
 </div>
-
-
 <mat-paginator [pageSizeOptions]="getPageSizeOptions()"></mat-paginator>
-
-<!-- Todo datatable export options -->
-<!-- <div class="export-options" *ngIf="exportEnabled">
-  <button mat-stroked-button (click)="exportExcel()">
-    Excel
-  </button>
-  <button mat-stroked-button (click)="exportPDF()">Pdf</button>
-</div> -->

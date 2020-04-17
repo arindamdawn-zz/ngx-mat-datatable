@@ -27,6 +27,6 @@ import { MatInputModule } from "@angular/material/input";
     ReactiveFormsModule,
     MatButtonModule
   ],
-  exports: [DatatableComponent, MatTableModule]
+  exports: [DatatableComponent]
 })
 export class NgxMatDatatableModule {}

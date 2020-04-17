@@ -8,6 +8,14 @@
       [showFilter]="true"
       [selectEnabled]="true"
       [selectAllEnabled]="false"
-    ></ngx-mat-datatable>
+      [expandedDetailEnabled]="true"
+      [expandedDetailRef]="nestedComponentRef"
+    >
+      <h1>Test From Parent</h1>
+    </ngx-mat-datatable>
   </mat-card>
+
+  <ng-template #nestedComponentRef>
+    <app-test></app-test>
+  </ng-template>
 </div>
