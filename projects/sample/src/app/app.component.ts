@@ -27,6 +27,8 @@ export class AppComponent {
     { name: "city", value: "City" },
     { name: "state", value: "State" },
     { name: "country", value: "Country" },
+    { name: "contact", value: "Contact" },
+    { name: "email", value: "Email" },
   ];
 
   testData: Customer[] = [
@@ -36,6 +38,8 @@ export class AppComponent {
       city: "Florida1",
       state: "LA",
       country: "USA",
+      contact: '9898989898',
+      email: 'shawn@gmail.com'
     },
     {
       name: "Jack Holland",
@@ -43,6 +47,8 @@ export class AppComponent {
       city: "Florida63",
       state: "West Bengal",
       country: "India",
+      contact: '9898989898',
+      email: 'jack.holland@gmail.com'
     },
     {
       name: "Rakesh Malhotra",
@@ -50,83 +56,35 @@ export class AppComponent {
       city: "Florida0",
       state: "Maharashtra",
       country: "India",
+      contact: '9897878787',
+      email: 'rakesh@gmail.com'
     },
     {
-      name: "Rakesh Malhotra",
+      name: "Will Smith",
       age: 45,
       city: "Florida2",
       state: "Maharashtra",
       country: "India",
+      contact: '9898787878',
+      email:'will@gmail.com'
     },
     {
-      name: "Rakesh Malhotra",
+      name: "Paula Scherr",
       age: 45,
       city: "Florida2",
       state: "Maharashtra",
       country: "India",
+      contact: '9898989898',
+      email: 'paula@gmail.com'
     },
     {
-      name: "Rakesh Malhotra",
+      name: "Amanda Mathews",
       age: 45,
       city: "Florida2",
       state: "Maharashtra",
       country: "India",
-    },
-    {
-      name: "Rakesh Malhotra",
-      age: 45,
-      city: "Florida2",
-      state: "Maharashtra",
-      country: "India",
-    },
-    {
-      name: "Rakesh Malhotra",
-      age: 45,
-      city: "Florida2",
-      state: "Maharashtra",
-      country: "India",
-    },
-    {
-      name: "Rakesh Malhotra",
-      age: 45,
-      city: "Florida2",
-      state: "Maharashtra",
-      country: "India",
-    },
-    {
-      name: "Rakesh Malhotra",
-      age: 45,
-      city: "Florida2",
-      state: "Maharashtra",
-      country: "India",
-    },
-    {
-      name: "Rakesh Malhotra",
-      age: 45,
-      city: "Florida2",
-      state: "Maharashtra",
-      country: "India",
-    },
-    {
-      name: "Rakesh Malhotra",
-      age: 45,
-      city: "Florida2",
-      state: "Maharashtra",
-      country: "India",
-    },
-    {
-      name: "Rakesh Malhotra",
-      age: 45,
-      city: "Florida2",
-      state: "Maharashtra",
-      country: "India",
-    },
-    {
-      name: "Rakesh Malhotra",
-      age: 45,
-      city: "Florida2",
-      state: "Maharashtra",
-      country: "India",
-    },
+      contact: '0989898989',
+      email: 'amanda@gmail.com'
+    }
   ];
 }

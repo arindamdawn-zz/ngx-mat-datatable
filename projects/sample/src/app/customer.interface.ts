@@ -4,4 +4,6 @@ export interface Customer{
   city: string;
   state: string;
   country: string;
+  contact: string;
+  email: string;
 }
