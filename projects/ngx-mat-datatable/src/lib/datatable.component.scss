@@ -23,6 +23,7 @@ table {
   }
 
 }
+
 tr.detail-row {
   height: 0;
 }
@@ -33,6 +34,10 @@ tr.element-row:not(.expanded-row):hover {
 
 tr.element-row:not(.expanded-row):active {
   background: #efefef;
+}
+
+.element-description {
+  width: 100%;
 }
 
 .table-filter.sticky {
