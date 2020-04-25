@@ -10,6 +10,7 @@
       [placeholder]="filterPlaceholder"
     />
   </mat-form-field>
+
   <table
     mat-table
     [dataSource]="dataSource"
@@ -24,7 +25,6 @@
       <th
         mat-header-cell
         *matHeaderCellDef
-        [ngClass]="{ sticky: stickyHeader }"
       >
         {{ indexColumnLabel }}
       </th>
@@ -36,7 +36,6 @@
       <th
         mat-header-cell
         *matHeaderCellDef
-        [ngClass]="{ sticky: stickyHeader }"
       >
         <ng-container *ngIf="selectAllEnabled; else selectColumnLabel">
           <mat-checkbox
@@ -68,7 +67,6 @@
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        [ngClass]="{ sticky: stickyHeader }"
       >
         {{ column.value }}
       </th>
@@ -85,7 +83,6 @@
       <th
         mat-header-cell
         *matHeaderCellDef
-        [ngClass]="{ sticky: stickyHeader }"
       >
         Action
       </th>
@@ -123,7 +120,7 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay" [ngClass]="{ sticky: stickyHeader }"></tr>
     <ng-container *ngIf="!expandedDetailEnabled">
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
     </ng-container>

@@ -8,13 +8,14 @@
 .sticky {
   position: sticky;
   z-index: 100;
+  top: 0;
   background-color: white;
 }
 
 table {
   width: 100%;
 
-  tr {
+  mat-row {
     cursor: pointer;
 
     &:hover {

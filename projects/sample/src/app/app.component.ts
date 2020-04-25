@@ -38,8 +38,8 @@ export class AppComponent {
       city: "Florida1",
       state: "LA",
       country: "USA",
-      contact: '9898989898',
-      email: 'shawn@gmail.com'
+      contact: "9898989898",
+      email: "shawn@gmail.com",
     },
     {
       name: "Jack Holland",
@@ -47,8 +47,8 @@ export class AppComponent {
       city: "Florida63",
       state: "West Bengal",
       country: "India",
-      contact: '9898989898',
-      email: 'jack.holland@gmail.com'
+      contact: "9898989898",
+      email: "jack.holland@gmail.com",
     },
     {
       name: "Rakesh Malhotra",
@@ -56,8 +56,8 @@ export class AppComponent {
       city: "Florida0",
       state: "Maharashtra",
       country: "India",
-      contact: '9897878787',
-      email: 'rakesh@gmail.com'
+      contact: "9897878787",
+      email: "rakesh@gmail.com",
     },
     {
       name: "Will Smith",
@@ -65,8 +65,8 @@ export class AppComponent {
       city: "Florida2",
       state: "Maharashtra",
       country: "India",
-      contact: '9898787878',
-      email:'will@gmail.com'
+      contact: "9898787878",
+      email: "will@gmail.com",
     },
     {
       name: "Paula Scherr",
@@ -74,8 +74,8 @@ export class AppComponent {
       city: "Florida2",
       state: "Maharashtra",
       country: "India",
-      contact: '9898989898',
-      email: 'paula@gmail.com'
+      contact: "9898989898",
+      email: "paula@gmail.com",
     },
     {
       name: "Amanda Mathews",
@@ -83,8 +83,62 @@ export class AppComponent {
       city: "Florida2",
       state: "Maharashtra",
       country: "India",
-      contact: '0989898989',
-      email: 'amanda@gmail.com'
-    }
+      contact: "0989898989",
+      email: "amanda@gmail.com",
+    },
+    {
+      name: "Amanda Mathews",
+      age: 45,
+      city: "Florida2",
+      state: "Maharashtra",
+      country: "India",
+      contact: "0989898989",
+      email: "amanda@gmail.com",
+    },
+    {
+      name: "Amanda Mathews",
+      age: 45,
+      city: "Florida2",
+      state: "Maharashtra",
+      country: "India",
+      contact: "0989898989",
+      email: "amanda@gmail.com",
+    },
+    {
+      name: "Amanda Mathews",
+      age: 45,
+      city: "Florida2",
+      state: "Maharashtra",
+      country: "India",
+      contact: "0989898989",
+      email: "amanda@gmail.com",
+    },
+    {
+      name: "Amanda Mathews",
+      age: 45,
+      city: "Florida2",
+      state: "Maharashtra",
+      country: "India",
+      contact: "0989898989",
+      email: "amanda@gmail.com",
+    },
+    {
+      name: "Amanda Mathews",
+      age: 45,
+      city: "Florida2",
+      state: "Maharashtra",
+      country: "India",
+      contact: "0989898989",
+      email: "amanda@gmail.com",
+    },
+    {
+      name: "Amanda Mathews",
+      age: 45,
+      city: "Florida2",
+      state: "Maharashtra",
+      country: "India",
+      contact: "0989898989",
+      email: "amanda@gmail.com",
+    },
   ];
 }
