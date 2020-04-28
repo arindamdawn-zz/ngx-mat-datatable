@@ -7,7 +7,6 @@ import {
   EventEmitter,
   ViewChild,
   SimpleChanges,
-  ContentChild,
   TemplateRef,
 } from "@angular/core";
 import { MatSort, Sort } from "@angular/material/sort";

@@ -15,7 +15,7 @@ import { Customer } from "./customer.interface";
 })
 export class AppComponent {
   title = "sample";
-  customStyles = {height: '400px' };
+  customStyles = { height: "400px" };
   testColumns: DataColumn[] = [
     {
       name: "name",
@@ -27,11 +27,16 @@ export class AppComponent {
     {
       name: "age",
       value: "Age",
+      options: { align: "center" },
     },
     { name: "city", value: "City" },
     { name: "state", value: "State" },
     { name: "country", value: "Country" },
-    { name: "contact", value: "Contact" },
+    {
+      name: "contact",
+      value: "Contact",
+      options: { expandRow: true, isLink: true },
+    },
     { name: "email", value: "Email" },
   ];
 
