@@ -15,7 +15,13 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { SelectionModel } from "@angular/cdk/collections";
 import { DataColumn } from "./datatable.interface";
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from "@angular/animations";
 
 @Component({
   selector: "ngx-mat-datatable",
@@ -38,6 +44,7 @@ export class DatatableComponent<T> implements OnInit {
   // Todo make generic click handlers for row actions (determine how to grab row data on specific action click such as edit)
   @Input() data: Array<T> = [];
   @Input() displayedColumns: DataColumn[] = [];
+  @Input() customContainerStyles: Object;
   @Input() actionEnabled: boolean = false;
   @Input() showIndex: boolean = false;
   @Input() indexColumnLabel: string = "No.";

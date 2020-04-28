@@ -15,10 +15,14 @@ import { Customer } from "./customer.interface";
 })
 export class AppComponent {
   title = "sample";
+  customStyles = {height: '400px' };
   testColumns: DataColumn[] = [
     {
       name: "name",
       value: "Name",
+      options: {
+        isLink: true,
+      },
     },
     {
       name: "age",

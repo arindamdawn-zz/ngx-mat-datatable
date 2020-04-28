@@ -1,7 +1,7 @@
 .table-container {
   width: 100%;
   overflow: auto;
-  height: 400px;
+  height: 100%;
   max-height: calc(100vh - 200px);
 }
 
@@ -16,7 +16,6 @@ table {
   width: 100%;
 
   mat-row {
-    cursor: pointer;
 
     &:hover {
       background-color: #eeeeee;
@@ -93,6 +92,10 @@ tr.detail-row {
 
 .mat-table thead {
   background-color: #f9f9f9;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
