@@ -12,6 +12,7 @@
       [expandedDetailRef]="nestedComponentRef"
       [actionEnabled]="true"
       [customContainerStyles]="customStyles"
+      (rowItemClicked)="handleRowItemClicked($event)"
     >
       <h1>Test From Parent</h1>
     </ngx-mat-datatable>

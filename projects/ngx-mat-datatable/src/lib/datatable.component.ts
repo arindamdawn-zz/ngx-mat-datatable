@@ -40,13 +40,14 @@ import {
 })
 export class DatatableComponent<T> implements OnInit {
   constructor() {}
-  // Todo make generic click handlers for row actions (determine how to grab row data on specific action click such as edit)
   @Input() data: Array<T> = [];
   @Input() displayedColumns: DataColumn[] = [];
   @Input() customContainerStyles: Object;
   @Input() actionEnabled: boolean = false;
   @Input() showIndex: boolean = false;
   @Input() indexColumnLabel: string = "No.";
+  @Input() sortEnabled: boolean = true;
+  @Input() disableSortClear: boolean = true;
   @Input() selectEnabled: boolean = false;
   @Input() selectAllEnabled: boolean = true;
   @Input() selectColumnTitle: string = "Select";
@@ -56,16 +57,17 @@ export class DatatableComponent<T> implements OnInit {
   @Input() filterPlaceholder: string = "Search";
   @Input() stickyHeader: boolean = true;
   @Input() expandedDetailRef: TemplateRef<any>;
-  // @Input() exportEnabled: boolean = false;
   @Input() name: string = "default_table";
-  @Output() rowItemClicked = new EventEmitter<{ name: string; rowData: T }>();
+  @Input() pageSize: number = 25;
+
+  @Output() rowItemClicked = new EventEmitter<{ column: DataColumn; rowData: T }>();
   @Output() actionClicked = new EventEmitter<{
     actionName: string;
     rowData: T;
   }>();
   @Output() selectedRows = new EventEmitter<T[]>();
   dataSource: MatTableDataSource<T>;
-  maxAll: number = 10;
+  maxAll: number = 25;
   selection = new SelectionModel<T>(true, []);
   columnsToDisplay: string[];
   noDataText: string = "No records found";
@@ -117,8 +119,11 @@ export class DatatableComponent<T> implements OnInit {
    * @param rowData
    */
 
-  onRowItemSelected(name: string, rowData: T): void {
-    this.rowItemClicked.emit({ name, rowData });
+  onRowItemSelected(column: DataColumn, rowData: T): void {
+    if (!!column.options && !!column.options.expandRow) {
+      this.expandedElement = this.expandedElement === rowData ? null : rowData;
+    }
+    this.rowItemClicked.emit({ column, rowData });
   }
 
   /**
@@ -172,9 +177,9 @@ export class DatatableComponent<T> implements OnInit {
 
   getPageSizeOptions(): number[] {
     if (this.dataSource && this.dataSource.paginator.length > this.maxAll)
-      return [5, 10, this.dataSource.paginator.length];
+      return [10, 25, 100];
     else if (this.maxAll !== this.dataSource.paginator.length) {
-      return [5, this.maxAll];
+      return [25, this.maxAll];
     } else {
       return [this.maxAll];
     }
