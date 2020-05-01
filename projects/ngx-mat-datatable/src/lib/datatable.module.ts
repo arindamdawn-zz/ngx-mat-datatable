@@ -11,6 +11,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { CommonModule } from "@angular/common";
 import { CdkTableModule } from "@angular/cdk/table";
 import { MatInputModule } from "@angular/material/input";
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [DatatableComponent],
@@ -25,7 +26,8 @@ import { MatInputModule } from "@angular/material/input";
     MatPaginatorModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule
   ],
   exports: [DatatableComponent]
 })

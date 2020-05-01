@@ -1,15 +1,25 @@
 <div class="table-container" [ngStyle]="customContainerStyles">
-  <mat-form-field
-    *ngIf="showFilter"
-    class="full-width table-filter"
-    [ngClass]="{ sticky: stickyHeader }"
-  >
-    <input
-      matInput
-      (keyup)="applyFilter($event.target.value)"
-      [placeholder]="filterPlaceholder"
-    />
-  </mat-form-field>
+  <div class="datatable-header-top" [ngClass]="{ sticky: stickyHeader }">
+    <div class="search-field" *ngIf="showSearch">
+      <mat-form-field class="table-filter">
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          [placeholder]="filterPlaceholder"
+        />
+      </mat-form-field>
+    </div>
+    <div class="datatable-toolbar" *ngIf="toolbar">
+      <button
+        mat-icon-button
+        aria-label="Search Icon"
+        matTooltip="Search"
+        (click)="showSearch = !showSearch"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
 
   <table
     mat-table
@@ -17,7 +27,6 @@
     class="mat-elevation-z0"
     matSort
     (matSortChange)="sortData($event)"
-    matTableExporter
     multiTemplateDataRows
   >
     <!-- Index Column -->
@@ -127,6 +136,7 @@
       mat-header-row
       *matHeaderRowDef="columnsToDisplay"
       [ngClass]="{ sticky: stickyHeader }"
+      [ngStyle]="{ top: toolbar ? '64px' : '0' }"
     ></tr>
     <ng-container *ngIf="!expandedDetailEnabled">
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>

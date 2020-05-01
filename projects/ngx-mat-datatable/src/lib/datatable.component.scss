@@ -30,8 +30,21 @@
 .sticky {
   position: sticky;
   z-index: 100;
-  top: 0;
   background-color: white;
+}
+
+.datatable-header-top{
+  display: flex;
+  top: 0;
+  height: 3rem;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: white;
+}
+
+.datatable-toolbar {
+  display: flex;
 }
 
 table {

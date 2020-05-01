@@ -43,10 +43,10 @@ export class AppComponent implements OnInit {
   testData: Customer[] = [];
 
   ngOnInit() {
-    for (let i = 1; i < 1000; i++) {
+    for (let i = 1; i < 100; i++) {
       this.testData.push({
         name: "Shawn Mendes",
-        age: 33,
+        age: i,
         city: "Florida1",
         state: "LA",
         country: "USA",

@@ -42,6 +42,7 @@ export class DatatableComponent<T> implements OnInit {
   constructor() {}
   @Input() data: Array<T> = [];
   @Input() displayedColumns: DataColumn[] = [];
+  @Input() toolbar: boolean = true;
   @Input() customContainerStyles: Object;
   @Input() actionEnabled: boolean = false;
   @Input() showIndex: boolean = false;
@@ -53,14 +54,16 @@ export class DatatableComponent<T> implements OnInit {
   @Input() selectColumnTitle: string = "Select";
   @Input() actionMenuItems: Array<string> = [];
   @Input() expandedDetailEnabled: boolean = false;
-  @Input() showFilter: boolean = false;
   @Input() filterPlaceholder: string = "Search";
   @Input() stickyHeader: boolean = true;
   @Input() expandedDetailRef: TemplateRef<any>;
   @Input() name: string = "default_table";
-  @Input() pageSize: number = 25;
+  @Input() pageSize: number;
 
-  @Output() rowItemClicked = new EventEmitter<{ column: DataColumn; rowData: T }>();
+  @Output() rowItemClicked = new EventEmitter<{
+    column: DataColumn;
+    rowData: T;
+  }>();
   @Output() actionClicked = new EventEmitter<{
     actionName: string;
     rowData: T;
@@ -73,6 +76,7 @@ export class DatatableComponent<T> implements OnInit {
   noDataText: string = "No records found";
   noData: boolean = false;
   expandedElement;
+  showSearch:boolean = false;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -176,10 +180,12 @@ export class DatatableComponent<T> implements OnInit {
   exportExcel() {}
 
   getPageSizeOptions(): number[] {
-    if (this.dataSource && this.dataSource.paginator.length > this.maxAll)
+    if (this.dataSource && this.dataSource.paginator.length > this.maxAll) {
+      this.pageSize = 25;
       return [10, 25, 100];
-    else if (this.maxAll !== this.dataSource.paginator.length) {
-      return [25, this.maxAll];
+    } else if (this.dataSource.paginator.length < this.maxAll) {
+      this.pageSize = this.dataSource.paginator.length;
+      return [10, this.dataSource.paginator.length];
     } else {
       return [this.maxAll];
     }
