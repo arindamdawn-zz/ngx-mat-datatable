@@ -1,3 +1,10 @@
+// Import theming functions
+@import '~@angular/material/theming';
+
+// Define your application's custom theme.
+$primary: mat-palette($mat-indigo);
+
+
 /* The emerging W3C standard
    that is currently Firefox-only */
 * {
@@ -33,7 +40,7 @@
   background-color: white;
 }
 
-.datatable-header-top{
+.datatable-header-top {
   display: flex;
   top: 0;
   height: 3rem;
@@ -131,7 +138,9 @@ tr.detail-row {
 
 .clickable {
   cursor: pointer;
-  &:hover{
+  color: mat-color($primary);
+
+  &:hover {
     text-decoration: underline;
   }
 }
