@@ -76,7 +76,7 @@ export class DatatableComponent<T> implements OnInit {
   noDataText: string = "No records found";
   noData: boolean = false;
   expandedElement;
-  showSearch:boolean = false;
+  showSearch: boolean = false;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -180,15 +180,9 @@ export class DatatableComponent<T> implements OnInit {
   exportExcel() {}
 
   getPageSizeOptions(): number[] {
-    if (this.dataSource && this.dataSource.paginator.length > this.maxAll) {
-      this.pageSize = 25;
-      return [10, 25, 100];
-    } else if (this.dataSource.paginator.length < this.maxAll) {
-      this.pageSize = this.dataSource.paginator.length;
-      return [10, this.dataSource.paginator.length];
-    } else {
-      return [this.maxAll];
-    }
+    this.pageSize = 25;
+    this.paginator.pageSize = this.pageSize
+    return [25, 50, 100];
   }
 
   sortData(sort: Sort): void {
