@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
       options: { align: "center" },
     },
     { name: "city", value: "City" },
-    { name: "state", value: "State" },
+    { name: "date", value: "Date", options: { sort: "date" } },
     { name: "country", value: "Country" },
     {
       name: "contact",
@@ -48,7 +48,9 @@ export class AppComponent implements OnInit {
         name: "Shawn Mendes",
         age: i,
         city: "Florida1",
-        state: "LA",
+        date: new Date(
+          (new Date().getTime() * Math.random() * i) / 10
+        ).toLocaleString(),
         country: "USA",
         contact: "9898989898",
         email: "shawn@gmail.com",

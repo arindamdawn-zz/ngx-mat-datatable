@@ -181,7 +181,7 @@ export class DatatableComponent<T> implements OnInit {
 
   getPageSizeOptions(): number[] {
     this.pageSize = 25;
-    this.paginator.pageSize = this.pageSize
+    this.paginator.pageSize = this.pageSize;
     return [25, 50, 100];
   }
 
@@ -192,15 +192,37 @@ export class DatatableComponent<T> implements OnInit {
     }
 
     const sortedData = this.data.slice();
-    sortedData.sort((a: T, b: T) =>
-      sort.direction === "asc"
-        ? _sortAlphanumeric(String(a[sort.active]), String(b[sort.active]))
-        : _sortAlphanumeric(String(b[sort.active]), String(a[sort.active]))
-    );
+
+    // fetch the associated column data
+    const currentColumnData = this.displayedColumns.filter(
+      (column) => column.name === sort.active
+    )[0];
+
+    if (
+      currentColumnData.options &&
+      currentColumnData.options.sort === "date"
+    ) {
+      sortedData.sort((a: T, b: T) =>
+        sort.direction === "asc"
+          ? _sortDates(a[sort.active], b[sort.active])
+          : _sortDates(b[sort.active], a[sort.active])
+      );
+    } else {
+      sortedData.sort((a: T, b: T) =>
+        sort.direction === "asc"
+          ? _sortAlphanumeric(String(a[sort.active]), String(b[sort.active]))
+          : _sortAlphanumeric(String(b[sort.active]), String(a[sort.active]))
+      );
+    }
+
     this.dataSource.data = sortedData;
   }
 }
 
 function _sortAlphanumeric(a: string, b: string): number {
   return a.localeCompare(b, "en", { numeric: true });
+}
+
+function _sortDates(a: string, b: string) {
+  return new Date(a).getTime() - new Date(b).getTime() > 0 ? 1 : -1;
 }

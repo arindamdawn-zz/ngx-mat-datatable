@@ -8,4 +8,5 @@ export type ColumnOptions = {
   isLink: boolean;
   expandRow: boolean;
   align: "left" | "right" | "center";
+  sort: 'default' | 'date'
 };
