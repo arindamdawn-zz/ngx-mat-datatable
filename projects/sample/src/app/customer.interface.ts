@@ -3,6 +3,7 @@ export interface Customer{
   age: number;
   city: string;
   date: string;
+  dateFormatted: string;
   country: string;
   contact: string;
   email: string;

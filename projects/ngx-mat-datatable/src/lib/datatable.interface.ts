@@ -4,9 +4,10 @@ export interface DataColumn {
   options?: Partial<ColumnOptions>;
 }
 
-export type ColumnOptions = {
+export interface ColumnOptions {
   isLink: boolean;
   expandRow: boolean;
-  align: "left" | "right" | "center";
-  sort: 'default' | 'date'
-};
+  align: 'left' | 'right' | 'center';
+  sort: 'default' | 'date';
+  useColumn?: string;
+}

@@ -8,56 +8,57 @@ import {
   ViewChild,
   SimpleChanges,
   TemplateRef,
-} from "@angular/core";
-import { MatSort, Sort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
-import { SelectionModel } from "@angular/cdk/collections";
-import { DataColumn } from "./datatable.interface";
+  OnChanges,
+} from '@angular/core';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { SelectionModel } from '@angular/cdk/collections';
+import { DataColumn } from './datatable.interface';
 import {
   trigger,
   state,
   style,
   transition,
   animate,
-} from "@angular/animations";
+} from '@angular/animations';
 
 @Component({
-  selector: "ngx-mat-datatable",
-  templateUrl: "./datatable.component.html",
-  styleUrls: ["./datatable.component.scss"],
+  selector: 'ngx-mat-datatable',
+  templateUrl: './datatable.component.html',
+  styleUrls: ['./datatable.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger("detailExpand", [
-      state("collapsed", style({ height: "0px", minHeight: "0" })),
-      state("expanded", style({ height: "*" })),
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition(
-        "expanded <=> collapsed",
-        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
       ),
     ]),
   ],
 })
-export class DatatableComponent<T> implements OnInit {
+export class DatatableComponent<T> implements OnInit, OnChanges {
   constructor() {}
   @Input() data: Array<T> = [];
   @Input() displayedColumns: DataColumn[] = [];
-  @Input() toolbar: boolean = true;
-  @Input() customContainerStyles: Object;
-  @Input() actionEnabled: boolean = false;
-  @Input() showIndex: boolean = false;
-  @Input() indexColumnLabel: string = "No.";
-  @Input() sortEnabled: boolean = true;
-  @Input() disableSortClear: boolean = true;
-  @Input() selectEnabled: boolean = false;
-  @Input() selectAllEnabled: boolean = true;
-  @Input() selectColumnTitle: string = "Select";
+  @Input() toolbar = true;
+  @Input() customContainerStyles: object;
+  @Input() actionEnabled = false;
+  @Input() showIndex = false;
+  @Input() indexColumnLabel = 'No.';
+  @Input() sortEnabled = true;
+  @Input() disableSortClear = true;
+  @Input() selectEnabled = false;
+  @Input() selectAllEnabled = true;
+  @Input() selectColumnTitle = 'Select';
   @Input() actionMenuItems: Array<string> = [];
-  @Input() expandedDetailEnabled: boolean = false;
-  @Input() filterPlaceholder: string = "Search";
-  @Input() stickyHeader: boolean = true;
+  @Input() expandedDetailEnabled = false;
+  @Input() filterPlaceholder = 'Search';
+  @Input() stickyHeader = true;
   @Input() expandedDetailRef: TemplateRef<any>;
-  @Input() name: string = "default_table";
+  @Input() name = 'default_table';
   @Input() pageSize: number;
 
   @Output() rowItemClicked = new EventEmitter<{
@@ -70,19 +71,19 @@ export class DatatableComponent<T> implements OnInit {
   }>();
   @Output() selectedRows = new EventEmitter<T[]>();
   dataSource: MatTableDataSource<T>;
-  maxAll: number = 25;
+  maxAll = 25;
   selection = new SelectionModel<T>(true, []);
   columnsToDisplay: string[];
-  noDataText: string = "No records found";
-  noData: boolean = false;
+  noDataText = 'No records found';
+  noData = false;
   expandedElement;
-  showSearch: boolean = false;
+  showSearch = false;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes["data"] !== undefined && changes.data.currentValue) {
+    if (changes.data !== undefined && changes.data.currentValue) {
       this.dataSource = new MatTableDataSource(changes.data.currentValue);
       this.dataSource.paginator = this.paginator;
       this.noData = this.dataSource.data.length === 0;
@@ -100,18 +101,18 @@ export class DatatableComponent<T> implements OnInit {
    * Populates data table
    */
   populateTableData(columnsData: Array<DataColumn>): void {
-    let columnNames: string[] = [];
+    const columnNames: string[] = [];
     columnsData.map((column) => {
       columnNames.push(column.name);
     });
     if (this.actionEnabled) {
-      columnNames.push("action"); //appends an extra 'action' column to the table
+      columnNames.push('action'); // appends an extra 'action' column to the table
     }
     if (this.showIndex) {
-      columnNames.unshift("index");
+      columnNames.unshift('index');
     }
     if (this.selectEnabled) {
-      columnNames.unshift("select"); // appends 'select' column as the 1st column
+      columnNames.unshift('select'); // appends 'select' column as the 1st column
     }
 
     this.columnsToDisplay = columnNames.slice();
@@ -119,8 +120,6 @@ export class DatatableComponent<T> implements OnInit {
 
   /**
    * Emits row item name and row Data
-   * @param itemName
-   * @param rowData
    */
 
   onRowItemSelected(column: DataColumn, rowData: T): void {
@@ -133,10 +132,9 @@ export class DatatableComponent<T> implements OnInit {
   /**
    * Emits action name on clicking a row action
    *
-   * @param {string} action
    */
   onActionClick(action: string, rowData: T): void {
-    this.actionClicked.emit({ actionName: action, rowData: rowData });
+    this.actionClicked.emit({ actionName: action, rowData });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -156,16 +154,15 @@ export class DatatableComponent<T> implements OnInit {
   /** The label for the checkbox on the passed row */
   checkboxLabel(row?: any): string {
     if (!row) {
-      return `${this.isAllSelected() ? "select" : "deselect"} all`;
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? "deselect" : "select"} row ${
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
       row.position + 1
     }`;
   }
 
   /**
    * Filters datatable with provided keyword
-   * @param filterValue
    */
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -186,7 +183,8 @@ export class DatatableComponent<T> implements OnInit {
   }
 
   sortData(sort: Sort): void {
-    if (sort.direction === "") {
+    const currentSort = sort;
+    if (sort.direction === '') {
       this.dataSource.data = this.data;
       return;
     }
@@ -198,18 +196,24 @@ export class DatatableComponent<T> implements OnInit {
       (column) => column.name === sort.active
     )[0];
 
+    if (currentColumnData.options.useColumn) {
+      currentSort.active = currentColumnData.options.useColumn;
+    } else {
+      currentSort.active = sort.active;
+    }
+
     if (
       currentColumnData.options &&
-      currentColumnData.options.sort === "date"
+      currentColumnData.options.sort === 'date'
     ) {
       sortedData.sort((a: T, b: T) =>
-        sort.direction === "asc"
+        sort.direction === 'asc'
           ? _sortDates(a[sort.active], b[sort.active])
           : _sortDates(b[sort.active], a[sort.active])
       );
     } else {
       sortedData.sort((a: T, b: T) =>
-        sort.direction === "asc"
+        sort.direction === 'asc'
           ? _sortAlphanumeric(String(a[sort.active]), String(b[sort.active]))
           : _sortAlphanumeric(String(b[sort.active]), String(a[sort.active]))
       );
@@ -220,7 +224,7 @@ export class DatatableComponent<T> implements OnInit {
 }
 
 function _sortAlphanumeric(a: string, b: string): number {
-  return a.localeCompare(b, "en", { numeric: true });
+  return a.localeCompare(b, 'en', { numeric: true });
 }
 
 function _sortDates(a: string, b: string) {

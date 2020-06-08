@@ -3,8 +3,6 @@
   "dest": "../../dist/ngx-mat-datatable",
   "lib": {
     "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "shimmer-loader": "shimmer-loader"
-    }
+    "umdModuleIds": {}
   }
 }
