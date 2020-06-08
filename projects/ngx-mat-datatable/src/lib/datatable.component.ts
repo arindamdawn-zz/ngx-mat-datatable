@@ -196,7 +196,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
       (column) => column.name === sort.active
     )[0];
 
-    if (currentColumnData.options.useColumn) {
+    if (currentColumnData.options && currentColumnData.options.useColumn) {
       currentSort.active = currentColumnData.options.useColumn;
     } else {
       currentSort.active = sort.active;

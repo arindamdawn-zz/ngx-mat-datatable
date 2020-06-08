@@ -51,12 +51,12 @@ export class AppComponent implements OnInit {
       this.testData.push({
         name: 'Shawn Mendes',
         age: i,
-        city: 'Florida1',
+        city: `Florida${i}`,
         dateFormatted: formatDate(randomDate, 'yyyy-MM-dd h:mm:ss a', 'en-CA'),
         date: randomDate,
         country: 'USA',
-        contact: '9898989898',
-        email: 'shawn@gmail.com',
+        contact: `9${i}8989898`,
+        email: `shawn${i}@gmail.com`,
       });
     }
   }
