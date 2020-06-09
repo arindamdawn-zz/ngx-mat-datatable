@@ -177,8 +177,6 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
   exportExcel() {}
 
   getPageSizeOptions(): number[] {
-    this.pageSize = 25;
-    this.paginator.pageSize = this.pageSize;
     return [25, 50, 100];
   }
 
