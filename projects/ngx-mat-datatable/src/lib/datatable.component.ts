@@ -209,6 +209,15 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
           ? _sortDates(a[sort.active], b[sort.active])
           : _sortDates(b[sort.active], a[sort.active])
       );
+    } else if (
+      currentColumnData.options &&
+      currentColumnData.options.sort === 'number'
+    ) {
+      sortedData.sort((a: T, b: T) =>
+        sort.direction === 'asc'
+          ? _sortNumeric(a[sort.active], b[sort.active])
+          : _sortNumeric(b[sort.active], a[sort.active])
+      );
     } else {
       sortedData.sort((a: T, b: T) =>
         sort.direction === 'asc'
@@ -223,6 +232,10 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
 
 function _sortAlphanumeric(a: string, b: string): number {
   return a.localeCompare(b, 'en', { numeric: true });
+}
+
+function _sortNumeric(a: number, b: number): number {
+  return a - b;
 }
 
 function _sortDates(a: string, b: string) {

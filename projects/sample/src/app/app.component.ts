@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     {
       name: 'age',
       value: 'Age',
-      options: { align: 'center' },
+      options: { align: 'center', sort: 'number' },
     },
     { name: 'city', value: 'City' },
     { name: 'dateFormatted', value: 'Date', options: { sort: 'date', useColumn: 'date' } },
@@ -44,19 +44,19 @@ export class AppComponent implements OnInit {
   testData: Customer[] = [];
 
   ngOnInit() {
-    for (let i = 1; i < 100; i++) {
+    for (let i = -10; i < 100; i++) {
       const randomDate = new Date(
         (new Date().getTime() * Math.random() * i) / 10
       ).toLocaleString();
       this.testData.push({
         name: 'Shawn Mendes',
         age: i,
-        city: `Florida${i}`,
+        city: `Florida`,
         dateFormatted: formatDate(randomDate, 'yyyy-MM-dd h:mm:ss a', 'en-CA'),
         date: randomDate,
         country: 'USA',
-        contact: `9${i}8989898`,
-        email: `shawn${i}@gmail.com`,
+        contact: `958989898`,
+        email: `shawn3@gmail.com`,
       });
     }
   }

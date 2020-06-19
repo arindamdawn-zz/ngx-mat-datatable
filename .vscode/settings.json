@@ -8,5 +8,6 @@
         "latex",
         "plaintext",
         "json"
-    ]
+    ],
+    "deno.enable": false
 }

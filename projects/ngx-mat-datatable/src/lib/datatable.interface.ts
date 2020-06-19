@@ -8,6 +8,6 @@ export interface ColumnOptions {
   isLink: boolean;
   expandRow: boolean;
   align: 'left' | 'right' | 'center';
-  sort: 'default' | 'date';
+  sort: 'default' | 'date' | 'number';
   useColumn?: string;
 }
