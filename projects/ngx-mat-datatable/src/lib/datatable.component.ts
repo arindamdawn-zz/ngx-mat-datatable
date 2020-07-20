@@ -9,6 +9,7 @@ import {
   SimpleChanges,
   TemplateRef,
   OnChanges,
+  ElementRef,
 } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -22,6 +23,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'ngx-mat-datatable',
@@ -81,6 +83,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild('search') searchInput: ElementRef;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data !== undefined && changes.data.currentValue) {
@@ -95,6 +98,15 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
     this.selection.changed.subscribe((next) =>
       this.selectedRows.emit(next.source.selected)
     );
+  }
+
+  onClickSearch() {
+    this.showSearch = !this.showSearch;
+    if (this.showSearch) {
+      setTimeout(() => {
+        this.searchInput.nativeElement.focus()
+      }, 0);
+    }
   }
 
   /**

@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
       value: 'Age',
       options: { align: 'center', sort: 'number' },
     },
-    { name: 'city', value: 'City' },
+    { name: 'city', value: 'City Name is pretty big', options: {align: 'center'} },
     { name: 'dateFormatted', value: 'Date', options: { sort: 'date', useColumn: 'date' } },
     { name: 'country', value: 'Country' },
     {

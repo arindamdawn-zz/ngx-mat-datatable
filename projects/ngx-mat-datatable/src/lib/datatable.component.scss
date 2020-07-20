@@ -144,11 +144,14 @@ tr.detail-row {
     text-decoration: underline;
   }
 }
-
-.textCenter {
-  text-align: center;
+:host ::ng-deep .column-align-center .mat-sort-header-container { 
+  display: flex;  
+  justify-content: center; 
 }
-
+:host ::ng-deep .column-align-right .mat-sort-header-container { 
+  display: flex-end;  
+  justify-content: center; 
+}
 @media screen and (max-width: 600px) {
   .table-container {
     overflow-x: scroll;
