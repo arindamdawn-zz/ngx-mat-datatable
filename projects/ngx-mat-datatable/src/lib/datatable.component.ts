@@ -23,7 +23,6 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'ngx-mat-datatable',
@@ -32,10 +31,17 @@ import { MatInput } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state(
+        'collapsed, void',
+        style({ height: '0px', minHeight: '0', display: 'none' })
+      ),
       state('expanded', style({ height: '*' })),
       transition(
         'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+      transition(
+        'expanded <=> void',
         animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
       ),
     ]),
@@ -104,7 +110,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
     this.showSearch = !this.showSearch;
     if (this.showSearch) {
       setTimeout(() => {
-        this.searchInput.nativeElement.focus()
+        this.searchInput.nativeElement.focus();
       }, 0);
     }
   }
