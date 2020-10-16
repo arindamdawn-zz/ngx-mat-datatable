@@ -116,7 +116,7 @@
         }"
         (click)="onRowItemSelected(column, element)"
       >
-        {{ element[column.name] }}
+        {{ formatColumnCell(column, element[column.name]) }}
       </td>
       <!-- </ng-template> -->
     </ng-container>
@@ -135,7 +135,7 @@
         mat-cell
         *matCellDef="let row"
         (click)="$event.stopPropagation()"
-        style="cursor: pointer;"
+        style="cursor: pointer"
       >
         <mat-icon mat-button [matMenuTriggerFor]="menu">more_vert</mat-icon>
         <mat-menu #menu="matMenu">

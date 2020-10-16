@@ -246,6 +246,13 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
 
     this.dataSource.data = sortedData;
   }
+
+  formatColumnCell(column: DataColumn, value: string) {
+    if (column.options && column.options.formatter) {
+      return column.options.formatter(value);
+    }
+    return value;
+  }
 }
 
 function _sortAlphanumeric(a: string, b: string): number {

@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
       value: 'Name',
       options: {
         isLink: true,
+        formatter: (value: string) => `$ ${value}`,
       },
     },
     {
