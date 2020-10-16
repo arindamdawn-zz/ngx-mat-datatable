@@ -23,18 +23,28 @@ export class AppComponent implements OnInit {
       value: 'Name',
       options: {
         isLink: true,
-        formatter: (value: string) => `$ ${value}`,
+        formatter: (value: string) =>
+          `<span style="color: green;size: 20px">${value}</span>`,
       },
     },
     {
       name: 'age',
       value: 'Age',
-      options: { align: 'center', sort: 'number' },
+      options: {
+        align: 'center',
+        sort: 'number',
+        formatter: (value: string) =>
+          `<span style='color: green;size: 20px'>${value}</span>`,
+      },
     },
     {
       name: 'city',
       value: 'City Name is pretty big',
-      options: { align: 'center' },
+      options: {
+        align: 'center',
+        formatter: (value: string) =>
+          `<span style='color: green;size: 20px'>${value}</span>`,
+      },
     },
     {
       name: 'dateFormatted',

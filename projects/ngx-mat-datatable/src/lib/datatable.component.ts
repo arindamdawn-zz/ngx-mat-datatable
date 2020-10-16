@@ -16,6 +16,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DataColumn } from './datatable.interface';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   trigger,
   state,
@@ -48,7 +49,7 @@ import {
   ],
 })
 export class DatatableComponent<T> implements OnInit, OnChanges {
-  constructor() {}
+  constructor(private sanitizer: DomSanitizer) {}
   @Input() data: Array<T> = [];
   @Input() displayedColumns: DataColumn[] = [];
   @Input() toolbar = true;
@@ -249,7 +250,9 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
 
   formatColumnCell(column: DataColumn, value: string) {
     if (column.options && column.options.formatter) {
-      return column.options.formatter(value);
+      return this.sanitizer.bypassSecurityTrustHtml(
+        column.options.formatter(value)
+      );
     }
     return value;
   }

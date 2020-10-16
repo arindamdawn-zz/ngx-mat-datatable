@@ -116,7 +116,9 @@
         }"
         (click)="onRowItemSelected(column, element)"
       >
-        {{ formatColumnCell(column, element[column.name]) }}
+        <span
+          [innerHTML]="formatColumnCell(column, element[column.name])"
+        ></span>
       </td>
       <!-- </ng-template> -->
     </ng-container>
