@@ -16,7 +16,8 @@ import { formatDate } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   title = 'sample';
-  customStyles = { height: '400px' };
+  customStyles = { height: '100%' };
+  actionMenuItems = ['Add', 'Remove'];
   testColumns: DataColumn[] = [
     {
       name: 'name',
@@ -63,7 +64,7 @@ export class AppComponent implements OnInit {
   testData: Customer[] = [];
 
   ngOnInit() {
-    for (let i = -10; i < 100; i++) {
+    for (let i = 1; i < 7; i++) {
       const randomDate = new Date(
         (new Date().getTime() * Math.random() * i) / 10
       ).toLocaleString();
@@ -80,6 +81,26 @@ export class AppComponent implements OnInit {
     }
   }
 
+  addData(data: Customer) {
+    this.testData = [...this.testData, data];
+  }
+
+  removeData(index: number) {}
+  handleActionClicked(event: { actionName: string; rowData: Customer }) {
+    if (event.actionName === 'Add') {
+      this.addData({
+        age: 23,
+        city: 'Melbourne',
+        contact: '9898989888',
+        country: 'USA',
+        date: '2020-02-01',
+        dateFormatted: '2020-03-01',
+        email: 'test@gmail.com',
+        name: 'Michael Jordan',
+      });
+      console.log(this.testData);
+    }
+  }
   handleRowItemClicked(event: { column: DataColumn; rowData: Customer }) {
     console.log(event, 'row item clicked');
   }

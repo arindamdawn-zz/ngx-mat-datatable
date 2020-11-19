@@ -10,8 +10,10 @@
       [expandedDetailEnabled]="true"
       [expandedDetailRef]="nestedComponentRef"
       [actionEnabled]="true"
+      [actionMenuItems]="actionMenuItems"
       [customContainerStyles]="customStyles"
       (rowItemClicked)="handleRowItemClicked($event)"
+      (actionClicked)="handleActionClicked($event)"
     >
       <h1>Test From Parent</h1>
     </ngx-mat-datatable>

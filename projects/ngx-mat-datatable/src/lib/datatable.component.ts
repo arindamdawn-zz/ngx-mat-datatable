@@ -87,6 +87,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
   noData = false;
   expandedElement;
   showSearch = false;
+  currentSort: Sort = undefined;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -97,6 +98,9 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
       this.dataSource = new MatTableDataSource(changes.data.currentValue);
       this.dataSource.paginator = this.paginator;
       this.noData = this.dataSource.data.length === 0;
+      if (this.currentSort) {
+        this.sortData(this.currentSort);
+      }
     }
   }
 
@@ -200,7 +204,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
   }
 
   sortData(sort: Sort): void {
-    const currentSort = sort;
+    this.currentSort = sort;
     if (sort.direction === '') {
       this.dataSource.data = this.data;
       return;
@@ -214,9 +218,9 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
     )[0];
 
     if (currentColumnData.options && currentColumnData.options.useColumn) {
-      currentSort.active = currentColumnData.options.useColumn;
+      this.currentSort.active = currentColumnData.options.useColumn;
     } else {
-      currentSort.active = sort.active;
+      this.currentSort.active = sort.active;
     }
 
     if (
