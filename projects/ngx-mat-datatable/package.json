@@ -19,11 +19,11 @@
     "url": "https://github.com/arindamdawn/ngx-mat-datatable/issues"
   },
   "peerDependencies": {
-    "@angular/common": "~10.0.0",
-    "@angular/core": "~10.0.0",
-    "@angular/material": "^10.0.0",
-    "@angular/forms": "~10.0.0",
-    "@angular/cdk": "^10.0.0"
+    "@angular/common": ">=9.0.0",
+    "@angular/core": ">=9.0.0",
+    "@angular/material": ">=9.0.0",
+    "@angular/forms": ">=9.0.0",
+    "@angular/cdk": ">=9.0.0"
   }
 ,
   "dependencies": {
