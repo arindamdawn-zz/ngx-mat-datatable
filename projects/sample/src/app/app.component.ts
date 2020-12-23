@@ -17,7 +17,7 @@ import { formatDate } from '@angular/common';
 export class AppComponent implements OnInit {
   title = 'sample';
   customStyles = { height: '100%' };
-  actionMenuItems = ['Add', 'Remove'];
+  actionMenuItems = ['Add', 'Remove', 'Show details'];
   testColumns: DataColumn[] = [
     {
       name: 'name',
@@ -99,6 +99,9 @@ export class AppComponent implements OnInit {
         name: 'Michael Jordan',
       });
       console.log(this.testData);
+    }
+    if (event.actionName === 'Show details') {
+      console.log('do magic');
     }
   }
   handleRowItemClicked(event: { column: DataColumn; rowData: Customer }) {
