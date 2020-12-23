@@ -26,7 +26,6 @@
     mat-table
     [dataSource]="dataSource"
     class="mat-elevation-z0"
-    [ngStyle]="customContainerStyles"
     matSort
     (matSortChange)="sortData($event)"
     multiTemplateDataRows
@@ -163,7 +162,7 @@
         <div
           class="element-detail"
           [@detailExpand]="
-            element === expandedElement ? 'expanded' : 'collapsed'
+            element == expandedElement ? 'expanded' : 'collapsed'
           "
         >
           <div class="element-description">

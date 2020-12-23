@@ -54,7 +54,6 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
   @Input() displayedColumns: DataColumn[] = [];
   @Input() toolbar = true;
   @Input() customContainerStyles: object;
-  @Input() tableStyles: object;
   @Input() actionEnabled = false;
   @Input() showIndex = false;
   @Input() indexColumnLabel = 'No.';

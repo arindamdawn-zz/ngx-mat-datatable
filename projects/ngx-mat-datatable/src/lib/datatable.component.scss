@@ -31,7 +31,6 @@ $primary: mat-palette($mat-indigo);
   width: 100%;
   overflow: auto;
   height: 100%;
-  max-height: calc(100vh - 200px);
   background-color: white;
 }
 
@@ -145,13 +144,13 @@ tr.detail-row {
     text-decoration: underline;
   }
 }
-:host ::ng-deep .column-align-center .mat-sort-header-container { 
-  display: flex;  
-  justify-content: center; 
+:host ::ng-deep .column-align-center .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
 }
-:host ::ng-deep .column-align-right .mat-sort-header-container { 
-  display: flex-end;  
-  justify-content: center; 
+:host ::ng-deep .column-align-right .mat-sort-header-container {
+  display: flex-end;
+  justify-content: center;
 }
 @media screen and (max-width: 600px) {
   .table-container {
