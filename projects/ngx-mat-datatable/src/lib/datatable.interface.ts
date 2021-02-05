@@ -1,3 +1,5 @@
+import { SortDirection } from '@angular/material/sort';
+
 export interface DataColumn {
   name: string;
   value: string;
@@ -11,4 +13,5 @@ export interface ColumnOptions {
   sort: 'default' | 'date' | 'number';
   useColumn?: string;
   formatter: (value: string) => string;
+  defaultSort?: SortDirection;
 }

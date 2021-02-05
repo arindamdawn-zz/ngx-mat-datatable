@@ -106,6 +106,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
 
   ngOnInit() {
     this.populateTableData(this.displayedColumns);
+    this.sortDefault(this.displayedColumns);
     this.selection.changed.subscribe((next) =>
       this.selectedRows.emit(next.source.selected)
     );
@@ -139,6 +140,25 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
     }
 
     this.columnsToDisplay = columnNames.slice();
+  }
+
+  /**
+   * Sort the Table with default Sorting
+   */
+  sortDefault(columnsData: Array<DataColumn>): void {
+    columnsData.forEach(column=>{
+      if (column.options && column.options.defaultSort) {
+          let defaultSortState:Sort = { active: column.name,direction: column.options.defaultSort };
+
+          // Update UI
+          this.sort.active = defaultSortState.active;
+          this.sort.direction = defaultSortState.direction;
+
+          // Emit to invoke sorting
+          this.sort.sortChange.emit(defaultSortState);
+
+      }
+    });
   }
 
   /**
@@ -217,10 +237,16 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
       (column) => column.name === sort.active
     )[0];
 
+    let colName = sort.active;
+
     if (currentColumnData.options && currentColumnData.options.useColumn) {
-      this.currentSort.active = currentColumnData.options.useColumn;
+      // If useColumn field is present,
+      // for sorting purpose, use value from `${useColumn}`column
+      // useColumn column typically contain data suitable for sorting
+      // paired with formattedData rendered in `${name}`column
+      colName= currentColumnData.options.useColumn;
     } else {
-      this.currentSort.active = sort.active;
+      colName = sort.active;
     }
 
     if (
@@ -229,8 +255,8 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
     ) {
       sortedData.sort((a: T, b: T) =>
         sort.direction === 'asc'
-          ? _sortDates(a[sort.active], b[sort.active])
-          : _sortDates(b[sort.active], a[sort.active])
+          ? _sortDates(a[colName], b[colName])
+          : _sortDates(b[colName], a[colName])
       );
     } else if (
       currentColumnData.options &&
@@ -238,14 +264,14 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
     ) {
       sortedData.sort((a: T, b: T) =>
         sort.direction === 'asc'
-          ? _sortNumeric(a[sort.active], b[sort.active])
-          : _sortNumeric(b[sort.active], a[sort.active])
+          ? _sortNumeric(a[colName], b[colName])
+          : _sortNumeric(b[colName], a[colName])
       );
     } else {
       sortedData.sort((a: T, b: T) =>
         sort.direction === 'asc'
-          ? _sortAlphanumeric(String(a[sort.active]), String(b[sort.active]))
-          : _sortAlphanumeric(String(b[sort.active]), String(a[sort.active]))
+          ? _sortAlphanumeric(String(a[colName]), String(b[colName]))
+          : _sortAlphanumeric(String(b[colName]), String(a[colName]))
       );
     }
 
