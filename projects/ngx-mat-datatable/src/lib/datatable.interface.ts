@@ -5,7 +5,15 @@ export interface DataColumn {
   value: string;
   options?: Partial<ColumnOptions>;
 }
-
+export enum ENestedSortLevel{
+  SECOND_LEVEL = 2,
+  THIRD_LEVEL = 3,
+  FOURTH_LEVEL = 4
+}
+export interface INestedSort{
+  level: ENestedSortLevel;
+  direction: SortDirection;
+}
 export interface ColumnOptions {
   isLink: boolean;
   expandRow: boolean;
@@ -14,4 +22,6 @@ export interface ColumnOptions {
   useColumn?: string;
   formatter: (value: string) => string;
   defaultSort?: SortDirection;
+  secondLevelSort?: SortDirection;
+  nestedSort?: INestedSort;
 }

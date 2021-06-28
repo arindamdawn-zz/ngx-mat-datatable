@@ -88,6 +88,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
   expandedElement;
   showSearch = false;
   currentSort: Sort = undefined;
+  nestedSortColumns: DataColumn[];
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -106,6 +107,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
 
   ngOnInit() {
     this.populateTableData(this.displayedColumns);
+    this.getNestedSortColumns();
     this.sortDefault(this.displayedColumns);
     this.selection.changed.subscribe((next) =>
       this.selectedRows.emit(next.source.selected)
@@ -142,6 +144,98 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
     this.columnsToDisplay = columnNames.slice();
   }
 
+  /**
+   * Populate nestedSortColumns variable from displayedColumns
+   */
+  getNestedSortColumns() {
+    this.nestedSortColumns = this.displayedColumns.filter((c) => {
+      return c.options && Object.keys(c.options).includes('nestedSort');
+    });
+
+    this.nestedSortColumns.length > 1 &&
+      this.nestedSortColumns.sort((a, b) => {
+        return _sortNumeric(
+          a.options.nestedSort.level,
+          b.options.nestedSort.level
+        );
+      });
+  }
+  /**
+   * handle All Nested Sorting After doing Primary Sort
+   * @param primarySort
+   * @param sortedData
+   * @param primaryColName
+   */
+  handleAllNestedSorts(
+    primarySort: Sort,
+    sortedData: T[],
+    primaryColName,
+    type
+  ) {
+    let primary = {
+      sort: {...primarySort},
+      name: primaryColName,
+      type: type,
+    };
+    
+    this.nestedSortColumns.forEach((sort) => {
+      let nested = {
+        sort: {
+          active: sort.name,
+          direction: sort.options.nestedSort.direction,
+        },
+        name: sort.name,
+        type: sort?.options.sort,
+      };
+      this.handleNestedSort(primary,nested,sort.options.nestedSort.level,sortedData);
+    });
+  }
+  /**
+   * Get Value for sorting
+   * @param sortParams 
+   * @param row1 
+   * @param row2 
+   * @param col 
+   * @returns integer
+   */
+  getSortVal(sortParams, row1,row2, col) {
+    if (sortParams.sort.direction === 'asc') {
+      if (sortParams.type === 'date') {
+        return _sortDates(row1[col],row2[col]);
+      } else if (sortParams.type === 'number') {
+        return _sortNumeric(row1[col],row2[col]);
+      } else {
+        return _sortAlphanumeric(row1[col],row2[col]);
+      }
+    } else if (sortParams.sort.direction === 'desc') {
+      if (sortParams.type === 'date') {
+        return _sortDates(row2[col],row1[col]);
+      } else if (sortParams.type === 'number') {
+        return _sortNumeric(row2[col],row1[col]);
+      } else {
+        return _sortAlphanumeric(row2[col],row1[col]);
+      }
+    }
+  }
+
+  handleNestedSort(primary,nested,level,sortedData){
+    sortedData.sort((a: T, b: T) =>{
+      let prevColVals  = this.nestedSortColumns.filter(col=>col.options.nestedSort.level<level).map(el=>{
+        return this.getSortVal({sort:{direction: el.options.nestedSort.direction},type:el.options.sort},a,b,el.name);
+      });
+      
+      let primaryVal = this.getSortVal({sort:{direction:primary.sort.direction},type:primary.type},a,b,primary.name);
+      prevColVals.unshift(primaryVal);
+
+      // If all elements doesn't require any change in position
+      // check if position to be adjusted based on this nested col
+      if(prevColVals.some(el=>el>0)) {
+        return 1;
+      } else {
+        return this.getSortVal({sort:{direction: nested.sort.direction},type:nested.type},a,b,nested.name);
+      }
+    });
+  }
   /**
    * Sort the Table with default Sorting
    */
@@ -275,6 +369,12 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
       );
     }
 
+    this.handleAllNestedSorts(
+      sort,
+      sortedData,
+      colName,
+      currentColumnData.options && currentColumnData.options.sort
+    );
     this.dataSource.data = sortedData;
   }
 
