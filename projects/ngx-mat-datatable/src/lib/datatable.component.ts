@@ -205,7 +205,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
       } else if (sortParams.type === 'number') {
         return _sortNumeric(row1[col],row2[col]);
       } else {
-        return _sortAlphanumeric(row1[col],row2[col]);
+        return _sortAlphanumeric(String(row1[col]),String(row2[col]));
       }
     } else if (sortParams.sort.direction === 'desc') {
       if (sortParams.type === 'date') {
@@ -213,7 +213,7 @@ export class DatatableComponent<T> implements OnInit, OnChanges {
       } else if (sortParams.type === 'number') {
         return _sortNumeric(row2[col],row1[col]);
       } else {
-        return _sortAlphanumeric(row2[col],row1[col]);
+        return _sortAlphanumeric(String(row2[col]),String(row1[col]));
       }
     }
   }
